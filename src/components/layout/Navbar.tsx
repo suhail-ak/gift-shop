@@ -12,6 +12,16 @@ export default function Navbar() {
         <Link href="/" className="text-xl font-bold">
           {t('brand')}
         </Link>
+
+        <div className="flex items-center gap-6">
+          <Link href="/" className="text-sm font-medium hover:underline">
+            {t('home')}
+          </Link>
+          <Link href="/admin" className="text-sm font-medium hover:underline">
+            {t('admin')}
+          </Link>
+        </div>
+
         <div className="flex items-center gap-4">
           <LocaleSwitcher />
           <CartButton />

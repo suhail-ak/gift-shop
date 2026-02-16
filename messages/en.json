@@ -4,7 +4,9 @@
     "description": "Find the perfect gift for your loved ones."
   },
   "Navbar": {
-    "brand": "Gift Shop"
+    "brand": "Gift Shop",
+    "home": "Home",
+    "admin": "Admin"
   },
   "Product": {
     "addToCart": "Add to Cart",
