@@ -3,7 +3,7 @@
 import { useRouter } from "@/i18n/routing";
 import { useEffect, useState } from "react";
 import { auth } from "@/lib/firebase";
-import { onAuthStateChanged, User } from "firebase/auth";
+import { onAuthStateChanged, User, signOut } from "firebase/auth";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 
@@ -17,12 +17,26 @@ export default function AdminLayout({
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-      if (!user) {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        try {
+          const idTokenResult = await user.getIdTokenResult();
+          if (idTokenResult.claims.admin) {
+            setUser(user);
+          } else {
+            await signOut(auth);
+            router.push("/admin/login");
+          }
+        } catch (error) {
+          console.error("Error checking admin claim:", error);
+          await signOut(auth);
+          router.push("/admin/login");
+        }
+      } else {
+        setUser(null);
         router.push("/admin/login");
       }
+      setLoading(false);
     });
     return () => unsubscribe();
   }, [router]);
@@ -44,7 +58,7 @@ export default function AdminLayout({
             <Button variant="ghost" className="justify-start" asChild>
                 <Link href="/admin/orders">Orders</Link>
             </Button>
-             <Button variant="outline" className="justify-start mt-8" onClick={() => auth.signOut()}>
+             <Button variant="outline" className="justify-start mt-8" onClick={() => signOut(auth)}>
                 Logout
             </Button>
         </nav>

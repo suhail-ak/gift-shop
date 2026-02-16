@@ -3,7 +3,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
@@ -31,8 +31,15 @@ export default function LoginPage() {
   const onSubmit = async (data: z.infer<typeof LoginFormSchema>) => {
     setError("");
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
-      router.push("/admin");
+      const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+      const idTokenResult = await userCredential.user.getIdTokenResult();
+
+      if (idTokenResult.claims.admin) {
+        router.push("/admin");
+      } else {
+        await signOut(auth);
+        setError("You are not authorized to access the admin dashboard.");
+      }
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message || "Failed to login");
