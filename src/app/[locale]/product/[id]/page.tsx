@@ -20,7 +20,7 @@ export default async function ProductPage({
 
   return (
     <div className="grid md:grid-cols-2 gap-8 py-8">
-      <div className="relative h-[400px] w-full bg-muted rounded-lg overflow-hidden">
+      <div className="relative aspect-square w-full bg-muted rounded-lg overflow-hidden">
         <Image
           src={product.image}
           alt={name}

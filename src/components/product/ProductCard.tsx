@@ -29,7 +29,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <p className="mt-2 font-bold text-lg">${product.price.toFixed(2)}</p>
       </CardContent>
       <CardFooter className="flex-col gap-2">
-        <div className="flex w-full gap-2">
+        <div className="flex flex-col w-full gap-2">
             <Button variant="outline" className="w-full" asChild>
                 <Link href={`/product/${product.id}`}>{t('details')}</Link>
             </Button>

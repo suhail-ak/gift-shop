@@ -45,22 +45,26 @@ export default function CartPage() {
           {items.map((item) => {
             const name = item.name[locale as keyof typeof item.name];
             return (
-              <div key={item.id} className="flex gap-4 border p-4 rounded-lg items-center">
-                <div className="relative w-24 h-24 flex-shrink-0">
-                  <Image src={item.image} alt={name} fill className="object-cover rounded-md" />
+              <div key={item.id} className="flex flex-col sm:flex-row gap-4 border p-4 rounded-lg items-center">
+                <div className="flex gap-4 flex-grow w-full sm:w-auto">
+                  <div className="relative w-24 h-24 flex-shrink-0">
+                    <Image src={item.image} alt={name} fill className="object-cover rounded-md" />
+                  </div>
+                  <div className="flex-grow space-y-2">
+                    <h3 className="font-bold">{name}</h3>
+                    <p className="text-muted-foreground">${item.price.toFixed(2)}</p>
+                  </div>
                 </div>
-                <div className="flex-grow space-y-2">
-                  <h3 className="font-bold">{name}</h3>
-                  <p className="text-muted-foreground">${item.price.toFixed(2)}</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}>
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <span className="w-8 text-center">{item.quantity}</span>
-                  <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-                    <Plus className="h-4 w-4" />
-                  </Button>
+                <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}>
+                      <Minus className="h-4 w-4" />
+                    </Button>
+                    <span className="w-8 text-center">{item.quantity}</span>
+                    <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </div>
                   <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)} className="ml-4 text-destructive">
                     <Trash2 className="h-4 w-4" />
                   </Button>
