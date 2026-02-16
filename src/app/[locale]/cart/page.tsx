@@ -54,14 +54,14 @@ export default function CartPage() {
                   <p className="text-muted-foreground">${item.price.toFixed(2)}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}>
+                  <Button variant="outline" size="icon-sm" onClick={() => updateQuantity(item.id, Math.max(1, item.quantity - 1))}>
                     <Minus className="h-4 w-4" />
                   </Button>
                   <span className="w-8 text-center">{item.quantity}</span>
-                  <Button variant="outline" size="icon" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                  <Button variant="outline" size="icon-sm" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
                     <Plus className="h-4 w-4" />
                   </Button>
-                  <Button variant="ghost" size="icon" onClick={() => removeItem(item.id)} className="ml-4 text-destructive">
+                  <Button variant="ghost" size="icon-sm" onClick={() => removeItem(item.id)} className="ml-4 text-destructive">
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
