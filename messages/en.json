@@ -1,0 +1,33 @@
+{
+  "HomePage": {
+    "title": "Welcome to the Gift Shop",
+    "description": "Find the perfect gift for your loved ones."
+  },
+  "Navbar": {
+    "brand": "Gift Shop"
+  },
+  "Product": {
+    "addToCart": "Add to Cart",
+    "price": "Price",
+    "details": "Details"
+  },
+  "Cart": {
+    "title": "Shopping Cart",
+    "checkout": "Checkout",
+    "empty": "Your cart is empty.",
+    "total": "Total",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "continueShopping": "Continue Shopping"
+  },
+  "Checkout": {
+    "title": "Guest Checkout",
+    "submit": "Place Order",
+    "email": "Email",
+    "name": "Full Name",
+    "address": "Address",
+    "city": "City",
+    "zip": "Zip Code",
+    "country": "Country"
+  }
+}
